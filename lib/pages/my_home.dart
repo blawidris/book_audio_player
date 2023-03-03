@@ -17,20 +17,16 @@ class _MyHomePageState extends State<MyHomePage>
   ScrollController? _scrollController;
   TabController? _tabController;
 
-  readJson() async {
+  Future readJson() async {
     // popular books
-    await DefaultAssetBundle.of(context)
-        .loadString('assets/json/popularBooks.json')
-        .then((value) {
+    await DefaultAssetBundle.of(context).loadString('assets/json/popularBooks.json').then((value) {
       setState(() {
         popularBooks = json.decode(value);
       });
     });
 
     // books
-    await DefaultAssetBundle.of(context)
-        .loadString('assets/json/ooks.json')
-        .then((value) {
+    await DefaultAssetBundle.of(context).loadString('assets/json/books.json').then((value) {
       setState(() {
         books = json.decode(value);
       });
@@ -83,7 +79,8 @@ class _MyHomePageState extends State<MyHomePage>
                     child: Text(
                       'Popular Books',
                       style: TextStyle(
-                        fontSize: 30,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   )
@@ -96,12 +93,12 @@ class _MyHomePageState extends State<MyHomePage>
                   children: [
                     Positioned(
                         top: 0,
-                        left: -20,
+                        left: -25,
                         right: 0,
                         child: Container(
                           height: 180,
                           width: MediaQuery.of(context).size.width,
-                          margin: const EdgeInsets.only(right: 10),
+                          // margin: const EdgeInsets.only(right: 10),
                           child: PageView.builder(
                             controller: PageController(viewportFraction: 0.8),
                             itemCount:
@@ -109,6 +106,7 @@ class _MyHomePageState extends State<MyHomePage>
                             itemBuilder: (_, i) {
                               return Container(
                                 height: 180,
+                                margin: const EdgeInsets.only(right: 15.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   image: DecorationImage(
@@ -153,10 +151,10 @@ class _MyHomePageState extends State<MyHomePage>
                                 AppTab(
                                     color: AppColors.menu1Color, text: 'Home'),
                                 AppTab(
-                                    color: AppColors.menu1Color,
+                                    color: AppColors.menu2Color,
                                     text: 'Popular'),
                                 AppTab(
-                                    color: AppColors.menu1Color,
+                                    color: AppColors.menu3Color,
                                     text: 'Trending')
                               ],
                             ),
@@ -165,11 +163,14 @@ class _MyHomePageState extends State<MyHomePage>
                       )
                     ];
                   },
-                  body: TabBarView(children: [
-                    ListItems(books: books),
-                    ListItems(books: popularBooks),
-                    ListItems(books: books),
-                  ]),
+                  body: TabBarView(
+                    controller: _tabController,
+                    children: [
+                      ListItems(books: books),
+                      ListItems(books: popularBooks),
+                      ListItems(books: books),
+                    ],
+                  ),
                 ),
               )
             ],

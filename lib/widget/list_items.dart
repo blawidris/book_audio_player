@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:audio_player/app_colors.dart' as AppColors;
 
-
 class ListItems extends StatelessWidget {
   List books = [];
 
@@ -36,6 +35,7 @@ class ListItems extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
                         image: AssetImage(books[i]['img']),
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -44,6 +44,7 @@ class ListItems extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Icon(Icons.star,
                               size: 24, color: AppColors.starColor),
@@ -54,41 +55,41 @@ class ListItems extends StatelessWidget {
                               color: AppColors.menu1Color,
                             ),
                           ),
-                          SizedBox(height: 10),
-                          Text(
-                            books[i]['title'],
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: 'Avenir',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            books[i]['text'],
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: 'Avenir',
-                              color: AppColors.starColor,
-                            ),
-                          ),
-                          Container(
-                            width: 60,
-                            height: 15,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(3),
-                                color: AppColors.loveColor),
-                            child: Text(
-                              'Love',
-                              style: TextStyle(
-                                fontSize: 10,
-                                fontFamily: 'Avenir',
-                                color: Colors.white,
-                              ),
-                            ),
-                          )
                         ],
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        books[i]['title'].toString().substring(0,17),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Avenir',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        books[i]['text'].toString().substring(0,17),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Avenir',
+                          color: AppColors.starColor,
+                        ),
+                      ),
+                      Container(
+                        width: 60,
+                        height: 15,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(3),
+                            color: AppColors.loveColor),
+                        child: Text(
+                          'Love',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontFamily: 'Avenir',
+                            color: Colors.white,
+                          ),
+                        ),
                       )
                     ],
                   )
